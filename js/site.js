@@ -376,7 +376,16 @@
       try {
         const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
         const json = await res.json().catch(() => ({}));
-        if (!res.ok || json.success === "false" || json.success === false) throw new Error();
+        if (!res.ok || json.success === "false" || json.success === false) {
+          // e.g. FormSubmit hasn't been activated yet: say so instead of a vague error.
+          console.warn("Contact form:", json.message || res.status);
+          if (/activat/i.test(json.message || "")) {
+            status.className = "form-status err";
+            status.textContent = `This form is still being set up, so your message wasn't delivered. Please email me directly at ${SITE.email}.`;
+            return;
+          }
+          throw new Error();
+        }
         form.reset();
         status.className = "form-status ok";
         status.textContent = CONTACT.successMessage || "Thanks — your message has been sent.";
