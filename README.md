@@ -66,14 +66,13 @@ edge (in Lightroom, Photos or Preview). Full-size camera files make the site slo
 
 ## 4. Contact form → your email
 
-Messages are sent by **FormSubmit** (free, no account needed) to the email in
-**Site settings**.
+Messages are sent by **Web3Forms** (free) to **terrencecao@icloud.com**, the
+address the access key was created with. The key is in **Site settings →
+Contact form key** (`web3formsKey` in `content/site.json`).
 
-- **The first time** someone sends a message (send yourself a test one from the
-  live site), FormSubmit emails you an activation link. Click **Activate Form**
-  once. After that, every message goes straight to your inbox.
-- If you change your email address later, you'll get one new activation email for it.
-- Check your spam folder if the activation email doesn't show up.
+- To send messages to a different address, create a new key at
+  **web3forms.com** with that address and replace the key.
+- Check your Junk folder if a message doesn't show up.
 
 ## 5. Instagram button
 

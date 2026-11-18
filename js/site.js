@@ -357,24 +357,41 @@
       const data = new FormData(form);
       if (data.get("_honey")) return; // spam bot filled the hidden field
 
-      // Messages go to the email in Site settings (via FormSubmit), unless a
-      // different form service address is filled in.
-      const endpoint = SITE.formEndpoint || (SITE.email ? `https://formsubmit.co/ajax/${encodeURIComponent(SITE.email)}` : "");
-      if (!endpoint) {
+      // Messages are emailed to you by Web3Forms (using your access key).
+      // Without a key, FormSubmit is used with the email in Site settings.
+      const subject = `New message from ${data.get("name")} — ${data.get("subject") || "website"}`;
+      let endpoint, body, headers = { Accept: "application/json" };
+      if (SITE.web3formsKey) {
+        endpoint = "https://api.web3forms.com/submit";
+        headers["Content-Type"] = "application/json";
+        body = JSON.stringify({
+          access_key: SITE.web3formsKey,
+          subject,
+          from_name: SITE.name || "Website",
+          name: data.get("name"),
+          email: data.get("email"),
+          "interested in": data.get("subject") || "",
+          message: data.get("message"),
+          botcheck: "",
+        });
+      } else if (SITE.formEndpoint || SITE.email) {
+        endpoint = SITE.formEndpoint || `https://formsubmit.co/ajax/${encodeURIComponent(SITE.email)}`;
+        data.append("_subject", subject);
+        data.append("_template", "table");
+        data.append("_captcha", "false");
+        body = data;
+      } else {
         status.className = "form-status err";
         status.textContent = "This form isn't set up yet.";
         return;
       }
-      data.append("_subject", `New message from ${data.get("name")} — ${data.get("subject") || "website"}`);
-      data.append("_template", "table");
-      data.append("_captcha", "false");
 
       const button = form.querySelector("button[type=submit]");
       button.disabled = true;
       status.className = "form-status";
       status.textContent = "Sending…";
       try {
-        const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+        const res = await fetch(endpoint, { method: "POST", body, headers });
         const json = await res.json().catch(() => ({}));
         if (!res.ok || json.success === "false" || json.success === false) {
           // e.g. FormSubmit hasn't been activated yet: say so instead of a vague error.

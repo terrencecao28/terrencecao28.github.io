@@ -35,6 +35,10 @@ content:
         label: Instagram link
         type: string
         description: Your full Instagram address, e.g. https://instagram.com/yourhandle. Leave empty to hide the Instagram button.
+      - name: web3formsKey
+        label: Contact form key (Web3Forms)
+        type: string
+        description: The access key from web3forms.com. Contact form messages are emailed to the address you used there.
       - name: formEndpoint
         label: Custom form address (optional)
         type: string
