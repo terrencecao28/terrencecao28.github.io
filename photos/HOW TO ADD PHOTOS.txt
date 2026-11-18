@@ -1,0 +1,21 @@
+HOW TO ADD PHOTOS
+
+Drop photos into a folder here and they show up in that gallery:
+
+  industrial, golden, antarctic, stills, shapes, landscape, people, street
+      -> the gallery with that name
+  _home
+      -> the 6 photos on the home page (only the first 6 are used)
+
+- Photos show in filename order. Name them 01.jpg, 02.jpg... to choose it.
+- Name a photo starting with "firstphoto" (e.g. firstphotogolden.jpg) to make
+  it the gallery's cover photo. It's also shown first in the gallery.
+- Delete a photo from a folder to remove it from the site.
+- Make a new folder to create a new gallery.
+- Any shape or size works. iPhone .heic photos work too.
+- Your originals stay here and are never changed or uploaded. The website uses
+  smaller copies that are made automatically in images/gallery/.
+
+Seeing them: while preview.command is open, just refresh the page.
+On the live site: open preview.command once, then in GitHub Desktop click
+"Commit to main", then "Push origin".

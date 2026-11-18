@@ -1,0 +1,4 @@
+# Put up to 6 photos in this folder to choose exactly what shows on the home
+# page, in filename order: the first 3 go left of your logo, the rest right.
+# Each photo is cropped to fit its spot (tall, square or wide).
+# If this folder is empty, the home page uses a mix of photos from your galleries.

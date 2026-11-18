@@ -1,0 +1,12 @@
+.DS_Store
+.claude/
+# Your full-size originals stay on your Mac. The site uses the smaller copies
+# in images/gallery/, which are made automatically.
+photos/**
+!photos/*/
+!photos/*/_info.txt
+!photos/HOW TO ADD PHOTOS.txt
+*.tmp.jpg
+__pycache__/
+/Screenshot *.png
+/Photography Website/

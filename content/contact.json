@@ -1,0 +1,15 @@
+{
+  "photo": "images/contact-photo.jpg",
+  "headline": "Let's work together.",
+  "intro": "For prints, gallery shows, collaborations, or modeling, send a message and I'll get back to you as soon as possible.",
+  "showEmail": true,
+  "interests": [
+    "General inquiry",
+    "Prints",
+    "Gallery shows",
+    "Collaborations",
+    "Modeling"
+  ],
+  "buttonText": "Send message",
+  "successMessage": "Thanks — your message has been sent. I'll be in touch soon."
+}

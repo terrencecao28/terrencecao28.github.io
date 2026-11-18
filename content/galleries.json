@@ -1,0 +1,149 @@
+{
+  "galleries": [
+    {
+      "title": "Industrial",
+      "description": "Factories, machinery and working spaces.",
+      "cover": "images/gallery/industrial/firstphotoindustrial.jpg",
+      "photos": [
+        "images/gallery/industrial/firstphotoindustrial.jpg",
+        "images/gallery/industrial/06a2744.jpg",
+        "images/gallery/industrial/factory-lady-copy.jpg",
+        "images/gallery/industrial/final3.jpg",
+        "images/gallery/industrial/img-5928.jpg",
+        "images/gallery/industrial/pirate-lady-copy.jpg",
+        "images/gallery/industrial/siena9-copy.jpg",
+        "images/gallery/industrial/untitled-film-stills-2-copy.jpg",
+        "images/gallery/industrial/urbanlandscape3-copy.jpg",
+        "images/gallery/industrial/urbanlandscape5-copy.jpg"
+      ]
+    },
+    {
+      "title": "Golden",
+      "description": "Warm light at the edges of the day.",
+      "cover": "images/gallery/golden/firstphotogolden.jpg",
+      "photos": [
+        "images/gallery/golden/firstphotogolden.jpg",
+        "images/gallery/golden/55b73f46-5396-44c8-a9a7-c1cd087b49cfalisa-copy.jpg",
+        "images/gallery/golden/florence-bridge-copy.jpg",
+        "images/gallery/golden/hungary1.jpg",
+        "images/gallery/golden/img-3496.jpg",
+        "images/gallery/golden/siena44-copy.jpg"
+      ]
+    },
+    {
+      "title": "Antarctic",
+      "description": "Ice, sea and life at the end of the world.",
+      "cover": "images/gallery/antarctic/firstphotoantarctic.jpg",
+      "photos": [
+        "images/gallery/antarctic/firstphotoantarctic.jpg",
+        "images/gallery/antarctic/antarctica15-copy.jpg",
+        "images/gallery/antarctic/antarctica16-copy.jpg",
+        "images/gallery/antarctic/antarctica22-copy.jpg",
+        "images/gallery/antarctic/orca1-copy.jpg",
+        "images/gallery/antarctic/penguin15-copy.jpg",
+        "images/gallery/antarctic/penguin21-copy.jpg",
+        "images/gallery/antarctic/penguin23-copy.jpg",
+        "images/gallery/antarctic/penguin26-copy.jpg",
+        "images/gallery/antarctic/penguin27-copy.jpg",
+        "images/gallery/antarctic/penguin37-copy.jpg",
+        "images/gallery/antarctic/penguin41-copy.jpg",
+        "images/gallery/antarctic/penguin48-copy.jpg",
+        "images/gallery/antarctic/screenshot-2026-11-17-at-9-06-59-pm.jpg",
+        "images/gallery/antarctic/seal11-copy.jpg"
+      ]
+    },
+    {
+      "title": "Stills",
+      "description": "Quiet details and still moments.",
+      "cover": "images/gallery/stills/firstphotostills.jpg",
+      "photos": [
+        "images/gallery/stills/firstphotostills.jpg",
+        "images/gallery/stills/advertisement1-copy.jpg",
+        "images/gallery/stills/advertisement2-copy.jpg",
+        "images/gallery/stills/advertisement3-copy.jpg",
+        "images/gallery/stills/advertisement7-copy.jpg",
+        "images/gallery/stills/advertisement8-copy.jpg",
+        "images/gallery/stills/fan1-copy.jpg",
+        "images/gallery/stills/studio-emulation1-copy.jpg"
+      ]
+    },
+    {
+      "title": "Shapes",
+      "description": "Lines, patterns and form.",
+      "cover": "images/gallery/shapes/firstphotoshapes.jpg",
+      "photos": [
+        "images/gallery/shapes/firstphotoshapes.jpg",
+        "images/gallery/shapes/architecture1.jpg",
+        "images/gallery/shapes/architecture5-copy.jpg",
+        "images/gallery/shapes/cactus1-copy.jpg",
+        "images/gallery/shapes/img-2859.jpg",
+        "images/gallery/shapes/img-3499.jpg",
+        "images/gallery/shapes/toparchitecture2-copy.jpg"
+      ]
+    },
+    {
+      "title": "Landscape",
+      "description": "Wide open places.",
+      "cover": "images/gallery/landscape/firstphotolandscape.jpg",
+      "photos": [
+        "images/gallery/landscape/firstphotolandscape.jpg",
+        "images/gallery/landscape/06a3047.jpg",
+        "images/gallery/landscape/img-4169.jpg",
+        "images/gallery/landscape/img-4178.jpg",
+        "images/gallery/landscape/img-4181.jpg",
+        "images/gallery/landscape/landscape1-copy.jpg",
+        "images/gallery/landscape/ranch1-copy.jpg",
+        "images/gallery/landscape/screenshot-2026-11-17-at-8-41-47-pm.jpg",
+        "images/gallery/landscape/siena3-copy.jpg",
+        "images/gallery/landscape/siena7-copy.jpg",
+        "images/gallery/landscape/siena18-copy.jpg",
+        "images/gallery/landscape/siena19-copy.jpg",
+        "images/gallery/landscape/siena25-copy.jpg",
+        "images/gallery/landscape/siena26-copy.jpg",
+        "images/gallery/landscape/swiss3.jpg",
+        "images/gallery/landscape/swiss4.jpg",
+        "images/gallery/landscape/tuscan-landscape5-copy.jpg"
+      ]
+    },
+    {
+      "title": "People",
+      "description": "Faces, portraits and personalities.",
+      "cover": "images/gallery/people/firstphotopeople.jpg",
+      "photos": [
+        "images/gallery/people/firstphotopeople.jpg",
+        "images/gallery/people/dad-yellow-car-copy.jpg",
+        "images/gallery/people/emile3-copy.jpg",
+        "images/gallery/people/emile13-copy.jpg",
+        "images/gallery/people/finalportfolio1-2-copy-2.jpg",
+        "images/gallery/people/screenshot-2026-11-17-at-8-39-05-pm.jpg",
+        "images/gallery/people/screenshot-2026-11-17-at-9-07-57-pm.jpg",
+        "images/gallery/people/siena37-copy.jpg",
+        "images/gallery/people/supriya4-copy.jpg",
+        "images/gallery/people/supriya24-copy.jpg",
+        "images/gallery/people/supriya41-copy.jpg",
+        "images/gallery/people/topportrait-copy.jpg",
+        "images/gallery/people/victoria3.jpg",
+        "images/gallery/people/zakiyah25-copy.jpg"
+      ]
+    },
+    {
+      "title": "Street",
+      "description": "Everyday moments in the city.",
+      "cover": "images/gallery/street/firstphotostreet.jpg",
+      "photos": [
+        "images/gallery/street/firstphotostreet.jpg",
+        "images/gallery/street/flash2-copy.jpg",
+        "images/gallery/street/flash7-copy.jpg",
+        "images/gallery/street/siena10-copy.jpg",
+        "images/gallery/street/siena21-copy.jpg",
+        "images/gallery/street/siena29-copy.jpg",
+        "images/gallery/street/siena30-copy.jpg",
+        "images/gallery/street/siena34-copy.jpg",
+        "images/gallery/street/siena36-copy.jpg",
+        "images/gallery/street/siena38-copy.jpg",
+        "images/gallery/street/siena40-copy.jpg",
+        "images/gallery/street/siena45-copy.jpg"
+      ]
+    }
+  ]
+}

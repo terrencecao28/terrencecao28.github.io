@@ -1,0 +1,65 @@
+{
+  "portrait": "images/about-portrait.jpg",
+  "headline": "",
+  "bio": "Terrence Cao attends St. Mark's School of Texas and is currently working under the mentorship of Scott Hunt. In his sophomore year, he earned both a gold and silver medal in the Scholastic Art & Writing Awards, with gold medals given out to only 0.2% of entries nationwide. Along with other accolades, he accounted for enough points to be named as a Texas Imagemaker, making him a top ten photographer in Texas. Outside of photography, he is an avid tennis and football player for his high school's varsity teams.",
+  "awardsHeading": "Awards",
+  "awards": [
+    {
+      "title": "Scholastic Regionals",
+      "details": "2x gold key, 5x silver keys, 5x HM",
+      "year": "",
+      "logo": "images/awards/scholastic.png",
+      "link": "https://www.artandwriting.org/"
+    },
+    {
+      "title": "Scholastic Nationals",
+      "details": "1x gold medal, 1x silver medal",
+      "year": "",
+      "logo": "images/awards/scholastic.png",
+      "link": "https://www.artandwriting.org/"
+    },
+    {
+      "title": "ATPI Top Program",
+      "details": "2x state champs",
+      "year": "",
+      "logo": "images/awards/atpi.png",
+      "link": "https://atpi.org/"
+    },
+    {
+      "title": "ATPI Fall Photo Contest",
+      "details": "1x 1st, 1x 2nd, 1x 3rd, 5x HM",
+      "year": "",
+      "logo": "images/awards/atpi.png",
+      "link": "https://atpi.org/"
+    },
+    {
+      "title": "ATPI Texas Imagemaker",
+      "details": "Ranked top 10 in Texas",
+      "year": "",
+      "logo": "images/awards/atpi.png",
+      "link": "https://atpi.org/"
+    },
+    {
+      "title": "TPS International Student Contest",
+      "details": "1x 2nd, 1x 3rd, 4x HM",
+      "year": "",
+      "logo": "images/awards/tps.png",
+      "link": "https://texasphoto.org/"
+    },
+    {
+      "title": "Young American Talent",
+      "details": "3x nominations",
+      "year": "",
+      "logo": "images/awards/young-american-talent.png",
+      "link": "https://yat2026.artcall.org/"
+    },
+    {
+      "title": "Heard Nature Photographer",
+      "details": "3x 2nd, 2x 3rd, 2x HM",
+      "year": "",
+      "logo": "images/awards/heard-nature-photographers.png",
+      "link": "https://heardnaturephotographers.com/"
+    }
+  ],
+  "buttonText": "Work with me"
+}

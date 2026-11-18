@@ -1,0 +1,3 @@
+# Gallery settings (all optional). Lines starting with # are ignored.
+title: Shapes
+description: Lines, patterns and form.

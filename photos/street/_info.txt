@@ -1,0 +1,3 @@
+# Gallery settings (all optional). Lines starting with # are ignored.
+title: Street
+description: Everyday moments in the city.
