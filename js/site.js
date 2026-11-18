@@ -128,34 +128,51 @@
     Promise.all(picks.map(shapeOf)).then((list) => {
       list = list.filter(Boolean);
       const tall = list.filter((p) => p.r < 1), wide = list.filter((p) => p.r >= 1);
-      const left = [], right = [];
-      tall.forEach((p, i) => (i % 2 ? right : left).push(p));
-      wide.forEach((p, i) => ((left.length > right.length) || (left.length === right.length && i % 2) ? right : left).push(p));
-      // left side: wide ones outside, tall ones inside; right side mirrored
-      left.sort((a, b) => (a.r < 1) - (b.r < 1));
-      right.sort((a, b) => (b.r < 1) - (a.r < 1));
-      const ordered = [...left, ...right];
-      strip.insertAdjacentHTML("afterbegin", left.map((p, i) => photo(p.src, i)).join(""));
-      strip.insertAdjacentHTML("beforeend", right.map((p, i) => photo(p.src, i + left.length)).join(""));
+      const sides = [{ tall: [], wide: [] }, { tall: [], wide: [] }];
+      tall.forEach((p, i) => sides[i % 2].tall.push(p));
+      wide.forEach((p, i) => sides[i % 2].wide.push(p));
 
-      // Photos keep their own shape (no cropping). Each gets the same area, so
-      // tall and wide photos look equally important, and the row fits the screen.
+      // Each side: the wide photos stacked on top of each other on the outside,
+      // the tall photo next to the logo. Nothing is cropped.
+      let n = 0;
+      const tile = (p) => { p.i = n; return photo(p.src, n++); };
+      const stack = (s) => s.wide.length ? `<div class="strip-stack">${s.wide.map(tile).join("")}</div>` : "";
+      const talls = (s) => s.tall.map(tile).join("");
+      strip.insertAdjacentHTML("afterbegin", `<div class="strip-side">${stack(sides[0])}${talls(sides[0])}</div>`);
+      strip.insertAdjacentHTML("beforeend", `<div class="strip-side">${talls(sides[1])}${stack(sides[1])}</div>`);
       const tiles = [...strip.querySelectorAll(".strip-photo")];
-      tiles.forEach((tile, i) => {
-        const r = ordered[i].r;
-        tile.style.flexGrow = Math.sqrt(r);
-        tile.style.aspectRatio = r;
-        tile.classList.add("sized");
-      });
+      tiles.forEach((t) => t.classList.add("sized"));
+
+      // Work out the largest height that fits, then size every photo exactly.
       const fit = () => {
-        strip.style.maxWidth = "";
-        if (window.innerWidth <= 760) return;
-        const cap = window.innerHeight * 0.62;
-        const tallest = Math.max(...tiles.map((t) => t.offsetHeight));
-        if (tallest > cap) {
-          const photosWidth = tiles.reduce((w, t) => w + t.offsetWidth, 0);
-          strip.style.maxWidth = (strip.offsetWidth - photosWidth * (1 - cap / tallest)) + "px";
+        const mobile = window.matchMedia("(max-width: 760px)").matches;
+        const g = parseFloat(getComputedStyle(strip).columnGap) || 0;
+        const header = document.querySelector("header");
+        const hCap = Math.max(200, window.innerHeight - (header ? header.offsetHeight : 0) - (mobile ? 140 : 90));
+        const shape = sides.map((s) => {
+          const k = s.wide.reduce((sum, p) => sum + 1 / p.r, 0);
+          const cols = (s.wide.length ? 1 : 0) + s.tall.length;
+          const a = (k ? 1 / k : 0) + s.tall.reduce((sum, p) => sum + p.r, 0);
+          const b = (k ? g * (s.wide.length - 1) / k : 0) - g * Math.max(cols - 1, 0);
+          return { k, a, b };  // side width = height * a - b
+        });
+        const sig = strip.querySelector(".signature");
+        const avail = strip.clientWidth;
+        let heights;
+        if (mobile) {
+          heights = shape.map((sh) => sh.a ? Math.min((avail + sh.b) / sh.a, hCap) : 0);
+        } else {
+          const room = avail - sig.offsetWidth - 2 * g;
+          const A = shape[0].a + shape[1].a, B = shape[0].b + shape[1].b;
+          const H = A ? Math.min((room + B) / A, hCap) : 0;
+          heights = [H, H];
         }
+        sides.forEach((s, i) => {
+          const H = Math.max(heights[i], 60), k = shape[i].k;
+          const W = k ? (H - g * (s.wide.length - 1)) / k : 0;
+          s.wide.forEach((p) => { tiles[p.i].style.width = W + "px"; tiles[p.i].style.height = W / p.r + "px"; });
+          s.tall.forEach((p) => { tiles[p.i].style.width = H * p.r + "px"; tiles[p.i].style.height = H + "px"; });
+        });
       };
       fit();
       window.addEventListener("resize", fit);

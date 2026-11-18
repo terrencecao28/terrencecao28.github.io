@@ -129,11 +129,13 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   margin: 0 auto;
 }
-/* Each photo keeps its own shape; the script sets its width share and shape. */
+/* Each side: wide photos stacked on the outside, tall photo next to the logo.
+   The script sizes every photo exactly so nothing is cropped. */
+.strip-side, .strip-stack { display: flex; gap: inherit; flex: 0 0 auto; }
+.strip-side { align-items: center; }
+.strip-stack { flex-direction: column; }
 .strip-photo {
-  flex: 1 1 0;
-  min-width: 0;
-  aspect-ratio: 1;
+  flex: 0 0 auto;
   overflow: hidden;
   opacity: 0;
   transform: translateY(14px);
@@ -172,7 +174,7 @@ a { color: inherit; text-decoration: none; }
 }
 .signature img { width: 100%; height: auto; }
 /* A logo image gets a wider spot so its small text stays readable */
-.signature.has-logo { flex-basis: 14vw; padding: 0 .4vw; }
+.signature.has-logo { flex-basis: clamp(220px, 19vw, 420px); padding: 0 .6vw; }
 .signature.has-logo:hover img { opacity: .8; }
 .signature img { transition: opacity .3s; }
 .signature:hover span { opacity: .75; }
@@ -182,10 +184,10 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 760px) {
   .home { padding: 24px 16px 40px; }
-  .home-strip { flex-wrap: wrap; gap: 12px; }
+  .home-strip { flex-wrap: wrap; gap: 10px; }
+  .strip-side { flex-basis: 100%; justify-content: center; }
   .signature, .signature.has-logo { order: -1; flex-basis: 100%; margin-bottom: 20px; }
-  .signature.has-logo img { max-width: 280px; }
-  .strip-break { display: block; flex-basis: 100%; height: 0; }
+  .signature.has-logo img { max-width: 320px; }
 }
 
 /* ---------- Galleries: portfolio grid with reveal effect ---------- */
