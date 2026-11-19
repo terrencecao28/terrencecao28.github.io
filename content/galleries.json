@@ -148,5 +148,375 @@
         "images/gallery/street/siena45-copy.jpg"
       ]
     }
-  ]
+  ],
+  "sizes": {
+    "images/gallery/antarctic/antarctica15-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/antarctica16-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/antarctica22-copy.jpg": [
+      2400,
+      1568
+    ],
+    "images/gallery/antarctic/firstphotoantarctic.jpg": [
+      2400,
+      1484
+    ],
+    "images/gallery/antarctic/orca1-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/penguin15-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/antarctic/penguin21-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/antarctic/penguin23-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/penguin26-copy.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/antarctic/penguin27-copy.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/antarctic/penguin37-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/penguin41-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/penguin48-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/antarctic/screenshot-2026-11-17-at-9-06-59-pm.jpg": [
+      2400,
+      1334
+    ],
+    "images/gallery/antarctic/seal11-copy.jpg": [
+      2400,
+      1313
+    ],
+    "images/gallery/golden/55b73f46-5396-44c8-a9a7-c1cd087b49cfalisa-copy.jpg": [
+      1689,
+      2400
+    ],
+    "images/gallery/golden/firstphotogolden.jpg": [
+      1561,
+      2400
+    ],
+    "images/gallery/golden/florence-bridge-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/golden/hungary1.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/golden/img-3496.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/golden/siena44-copy.jpg": [
+      2400,
+      1793
+    ],
+    "images/gallery/industrial/06a2744.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/industrial/factory-lady-copy.jpg": [
+      1781,
+      2400
+    ],
+    "images/gallery/industrial/final3.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/industrial/firstphotoindustrial.jpg": [
+      2400,
+      1347
+    ],
+    "images/gallery/industrial/img-5928.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/industrial/pirate-lady-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/industrial/siena9-copy.jpg": [
+      2400,
+      1920
+    ],
+    "images/gallery/industrial/untitled-film-stills-2-copy.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/industrial/urbanlandscape3-copy.jpg": [
+      2400,
+      1920
+    ],
+    "images/gallery/industrial/urbanlandscape5-copy.jpg": [
+      1920,
+      2400
+    ],
+    "images/gallery/landscape/06a3047.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/landscape/firstphotolandscape.jpg": [
+      2400,
+      1767
+    ],
+    "images/gallery/landscape/img-4169.jpg": [
+      2400,
+      1580
+    ],
+    "images/gallery/landscape/img-4178.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/landscape/img-4181.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/landscape/landscape1-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/landscape/ranch1-copy.jpg": [
+      2400,
+      1631
+    ],
+    "images/gallery/landscape/screenshot-2026-11-17-at-8-41-47-pm.jpg": [
+      2400,
+      1547
+    ],
+    "images/gallery/landscape/siena18-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/landscape/siena19-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/landscape/siena25-copy.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/landscape/siena26-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/landscape/siena3-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/landscape/siena7-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/landscape/swiss3.jpg": [
+      2400,
+      1707
+    ],
+    "images/gallery/landscape/swiss4.jpg": [
+      2400,
+      1707
+    ],
+    "images/gallery/landscape/tuscan-landscape5-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/people/dad-yellow-car-copy.jpg": [
+      1610,
+      2400
+    ],
+    "images/gallery/people/emile13-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/emile3-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/finalportfolio1-2-copy-2.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/firstphotopeople.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/people/screenshot-2026-11-17-at-8-39-05-pm.jpg": [
+      1583,
+      2400
+    ],
+    "images/gallery/people/screenshot-2026-11-17-at-9-07-57-pm.jpg": [
+      2400,
+      2400
+    ],
+    "images/gallery/people/siena37-copy.jpg": [
+      2400,
+      1714
+    ],
+    "images/gallery/people/supriya24-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/supriya4-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/supriya41-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/topportrait-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/people/victoria3.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/people/zakiyah25-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/shapes/architecture1.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/shapes/architecture5-copy.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/shapes/cactus1-copy.jpg": [
+      1616,
+      2400
+    ],
+    "images/gallery/shapes/firstphotoshapes.jpg": [
+      1939,
+      2400
+    ],
+    "images/gallery/shapes/img-2859.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/shapes/img-3499.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/shapes/toparchitecture2-copy.jpg": [
+      1919,
+      2400
+    ],
+    "images/gallery/stills/advertisement1-copy.jpg": [
+      2400,
+      1799
+    ],
+    "images/gallery/stills/advertisement2-copy.jpg": [
+      2400,
+      1523
+    ],
+    "images/gallery/stills/advertisement3-copy.jpg": [
+      1920,
+      2400
+    ],
+    "images/gallery/stills/advertisement7-copy.jpg": [
+      1799,
+      2400
+    ],
+    "images/gallery/stills/advertisement8-copy.jpg": [
+      2400,
+      2399
+    ],
+    "images/gallery/stills/fan1-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/stills/firstphotostills.jpg": [
+      2024,
+      2400
+    ],
+    "images/gallery/stills/flora1-copy.jpg": [
+      2400,
+      2400
+    ],
+    "images/gallery/stills/flora2-copy.jpg": [
+      2400,
+      2400
+    ],
+    "images/gallery/stills/flora3-copy.jpg": [
+      2400,
+      2400
+    ],
+    "images/gallery/stills/studio-emulation1-copy.jpg": [
+      1714,
+      2400
+    ],
+    "images/gallery/street/firstphotostreet.jpg": [
+      2400,
+      1600
+    ],
+    "images/gallery/street/flash2-copy.jpg": [
+      1600,
+      2400
+    ],
+    "images/gallery/street/flash7-copy.jpg": [
+      2400,
+      1599
+    ],
+    "images/gallery/street/siena10-copy.jpg": [
+      2400,
+      1833
+    ],
+    "images/gallery/street/siena21-copy.jpg": [
+      1800,
+      2400
+    ],
+    "images/gallery/street/siena29-copy.jpg": [
+      2400,
+      1350
+    ],
+    "images/gallery/street/siena30-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/street/siena34-copy.jpg": [
+      2400,
+      1800
+    ],
+    "images/gallery/street/siena36-copy.jpg": [
+      2400,
+      1714
+    ],
+    "images/gallery/street/siena38-copy.jpg": [
+      2400,
+      1714
+    ],
+    "images/gallery/street/siena40-copy.jpg": [
+      1726,
+      2400
+    ],
+    "images/gallery/street/siena45-copy.jpg": [
+      2400,
+      1800
+    ]
+  }
 }

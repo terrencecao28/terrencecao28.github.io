@@ -22,6 +22,13 @@
     if (!src) return "";
     return /^\/(?!\/)/.test(src) ? src.slice(1) : src;
   };
+  // Width and height of each photo (from galleries.json), and a smaller copy
+  // of it for the grids, so pages can be laid out and shown quickly.
+  let SIZES = {};
+  const small = (p) => {
+    const src = img(p);
+    return SIZES[src] && src.startsWith("images/gallery/") ? "images/small/" + src.slice(15) : src;
+  };
   const paragraphs = (text) => String(text || "").split(/\n\s*\n/)
     .filter((t) => t.trim()).map((t) => `<p>${esc(t.trim()).replace(/\n/g, "<br>")}</p>`).join("");
 
@@ -107,7 +114,7 @@
     }
     const photo = (src, i) => `
       <a class="strip-photo" href="galleries.html" style="animation-delay:${200 + i * 110}ms">
-        <img src="${esc(img(src))}" alt="">
+        <img src="${esc(small(src))}" alt="">
       </a>`;
     const signature = HOME.signature
       ? `<img src="${esc(img(HOME.signature))}" alt="${esc(SITE.name)}">`
@@ -120,6 +127,8 @@
     // Find each photo's shape, then lay them out: on each side of the logo,
     // the tall photos sit next to the logo and the wide ones further out.
     const shapeOf = (src) => new Promise((done) => {
+      const known = SIZES[img(src)];
+      if (known) return done({ src, r: known[0] / known[1] });  // no need to wait for the download
       const im = new Image();
       im.onload = () => done({ src, r: im.naturalWidth / im.naturalHeight || 1 });
       im.onerror = () => done(null);
@@ -202,7 +211,7 @@
     const grid = document.getElementById("portfolio-grid");
     grid.innerHTML = GALLERIES.map((g, i) => `
       <a class="tile" href="gallery.html?g=${encodeURIComponent(g.slug)}" style="animation-delay:${i * 120}ms">
-        <img src="${esc(img(g.cover || g.photos[0]))}" alt="${esc(g.title)}" loading="${i < 4 ? "eager" : "lazy"}">
+        <img src="${esc(small(g.cover || g.photos[0]))}" alt="${esc(g.title)}" loading="${i < 4 ? "eager" : "lazy"}">
         <div class="tile-overlay">
           <h2 class="tile-title">${esc(g.title)}</h2>
           <span class="tile-count">${g.photos.length} photograph${g.photos.length === 1 ? "" : "s"}</span>
@@ -239,7 +248,7 @@
 
     wall.innerHTML = g.photos.map((p, i) => `
       <button type="button" data-i="${i}" aria-label="Open photo ${i + 1}">
-        <img src="${esc(img(p))}" alt="${esc(g.title + " " + (i + 1))}" loading="lazy">
+        <img src="${esc(small(p))}" alt="${esc(g.title + " " + (i + 1))}" loading="lazy"${SIZES[img(p)] ? ` width="${SIZES[img(p)][0]}" height="${SIZES[img(p)][1]}"` : ""}>
       </button>`).join("");
     wall.querySelectorAll("img").forEach((el) => {
       if (el.complete) el.classList.add("loaded");
@@ -443,6 +452,7 @@
       return;
     }
 
+    SIZES = (data.galleries && data.galleries.sizes) || {};
     const GALLERIES = ((data.galleries && data.galleries.galleries) || [])
       .filter((g) => g && g.title)
       .map((g) => ({ ...g, slug: slugify(g.title), photos: (g.photos || []).filter(Boolean) }))

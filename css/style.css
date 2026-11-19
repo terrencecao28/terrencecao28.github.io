@@ -140,6 +140,7 @@ a { color: inherit; text-decoration: none; }
 .strip-photo {
   flex: 0 0 auto;
   overflow: hidden;
+  background: #181818; /* shows the photo's frame while it downloads */
   opacity: 0;
   transform: translateY(14px);
 }

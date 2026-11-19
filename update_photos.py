@@ -34,10 +34,18 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PHOTOS_DIR = os.path.join(ROOT, "photos")
 WEB_DIR = os.path.join(ROOT, "images", "gallery")
 WEB_URL = "images/gallery"
+SMALL_DIR = os.path.join(ROOT, "images", "small")
+SMALL_URL = "images/small"
 GALLERIES_FILE = os.path.join(ROOT, "content", "galleries.json")
 HOME_FILE = os.path.join(ROOT, "content", "home.json")
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".tif", ".tiff", ".heic", ".heif"}
 MAX_EDGE = 2400  # longest side, in pixels, of the photos on the website
+SMALL_EDGE = 1200  # quicker-loading copies used in the photo grids and home page
+
+# Width and height of every web photo, saved in galleries.json so pages can be
+# laid out before the photos have finished downloading.
+SIZES = {}
+SEEN = set()
 
 QUIET = "--quiet" in sys.argv
 
@@ -67,33 +75,68 @@ def web_name(original):
     return (slugify(os.path.splitext(original)[0]) or "photo") + ".jpg"
 
 
-def make_web_copy(src, dst):
-    """Small, fast-loading JPG copy of an original (only redone when the original changes)."""
-    if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src):
-        return True
+def resize(src, dst, edge, quality):
+    """Save a JPG copy of src whose longest side is at most `edge` pixels."""
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     tmp = dst + ".tmp.jpg"
     if sys.platform == "darwin":
-        cmd = ["sips", "-Z", str(MAX_EDGE), "-s", "format", "jpeg", "-s", "formatOptions", "82", src, "--out", tmp]
+        cmd = ["sips", "-Z", str(edge), "-s", "format", "jpeg", "-s", "formatOptions", str(quality), src, "--out", tmp]
         ok = subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
     else:
         try:
             from PIL import Image, ImageOps
             with Image.open(src) as im:
                 im = ImageOps.exif_transpose(im).convert("RGB")
-                im.thumbnail((MAX_EDGE, MAX_EDGE), Image.LANCZOS)
-                im.save(tmp, quality=82, optimize=True, progressive=True)
+                im.thumbnail((edge, edge), Image.LANCZOS)
+                im.save(tmp, quality=quality, optimize=True, progressive=True)
             ok = True
         except Exception:
             ok = False
     if ok and os.path.exists(tmp):
         os.replace(tmp, dst)
-        say(f"  Prepared {os.path.relpath(src, ROOT)}")
         return True
     if os.path.exists(tmp):
         os.remove(tmp)
-    say(f"  Couldn't read {os.path.relpath(src, ROOT)} (skipped)")
     return False
+
+
+def size_of(path):
+    if sys.platform == "darwin":
+        out = subprocess.run(["sips", "-g", "pixelWidth", "-g", "pixelHeight", path],
+                             capture_output=True, text=True).stdout
+        nums = re.findall(r"pixel(?:Width|Height): (\d+)", out)
+        return [int(nums[0]), int(nums[1])] if len(nums) == 2 else None
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            return list(im.size)
+    except Exception:
+        return None
+
+
+def newer(src, dst):
+    return not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src)
+
+
+def make_web_copy(src, dst, url):
+    """Fast-loading JPG copies of an original: a 2400px one for full-screen
+    viewing and a 1200px one for the grids (only redone when the original changes)."""
+    changed = False
+    if newer(src, dst):
+        if not resize(src, dst, MAX_EDGE, 82):
+            say(f"  Couldn't read {os.path.relpath(src, ROOT)} (skipped)")
+            return False
+        say(f"  Prepared {os.path.relpath(src, ROOT)}")
+        changed = True
+    small = os.path.join(SMALL_DIR, os.path.relpath(dst, WEB_DIR))
+    if newer(dst, small):
+        resize(dst, small, SMALL_EDGE, 78)
+    if changed or url not in SIZES:
+        dims = size_of(dst)
+        if dims:
+            SIZES[url] = dims
+    SEEN.add(url)
+    return True
 
 
 def sync_folder(name):
@@ -110,14 +153,16 @@ def sync_folder(name):
         if out in used:  # e.g. photo.jpg and photo.png
             out = slugify(f) + ".jpg"
         used.add(out)
-        if make_web_copy(os.path.join(folder, f), os.path.join(WEB_DIR, name, out)):
-            paths.append(f"{WEB_URL}/{name}/{out}")
+        url = f"{WEB_URL}/{name}/{out}"
+        if make_web_copy(os.path.join(folder, f), os.path.join(WEB_DIR, name, out), url):
+            paths.append(url)
     # Remove web copies of photos that were deleted from the folder.
-    web_folder = os.path.join(WEB_DIR, name)
-    if os.path.isdir(web_folder):
-        for f in os.listdir(web_folder):
-            if f not in used:
-                os.remove(os.path.join(web_folder, f))
+    for base in (WEB_DIR, SMALL_DIR):
+        web_folder = os.path.join(base, name)
+        if os.path.isdir(web_folder):
+            for f in os.listdir(web_folder):
+                if f not in used:
+                    os.remove(os.path.join(web_folder, f))
     cover = f"{WEB_URL}/{name}/{web_name(first)}" if first else None
     return paths, (cover if cover in paths else None)
 
@@ -193,10 +238,13 @@ def sync_galleries():
             g["cover"] = ""
 
     # Web copies of folders that no longer exist are removed.
-    if os.path.isdir(WEB_DIR):
-        for name in os.listdir(WEB_DIR):
-            if not os.path.isdir(os.path.join(PHOTOS_DIR, name)) and os.path.isdir(os.path.join(WEB_DIR, name)):
-                shutil.rmtree(os.path.join(WEB_DIR, name))
+    for base in (WEB_DIR, SMALL_DIR):
+        if os.path.isdir(base):
+            for name in os.listdir(base):
+                if not os.path.isdir(os.path.join(PHOTOS_DIR, name)) and os.path.isdir(os.path.join(base, name)):
+                    shutil.rmtree(os.path.join(base, name))
+
+    data["sizes"] = {k: SIZES[k] for k in sorted(SEEN) if k in SIZES}
 
     if save_if_changed(GALLERIES_FILE, data, before):
         for g in galleries:
@@ -225,8 +273,10 @@ def sync_home():
 def main():
     if not os.path.isdir(PHOTOS_DIR):
         sys.exit("No photos/ folder found next to this script.")
-    changed = sync_galleries()
-    changed = sync_home() or changed
+    with open(GALLERIES_FILE, encoding="utf-8") as f:
+        SIZES.update(json.load(f).get("sizes") or {})
+    changed = sync_home()  # first, so its photo sizes are saved too
+    changed = sync_galleries() or changed
     say("Photos updated. Refresh the page to see them." if changed else "Everything is already up to date.")
 
 
