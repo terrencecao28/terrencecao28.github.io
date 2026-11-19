@@ -81,15 +81,15 @@
       <span class="social">${SITE.instagram ? `<a href="${esc(SITE.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ""}</span>`;
     document.body.append(footer);
 
-    if (SITE.name) {
+    // Each page's own title and description (written for Google) are kept.
+    if (SITE.name && !document.title.includes(SITE.name)) {
       document.title = page === "home"
         ? (SITE.tagline ? `${SITE.name} — ${SITE.tagline}` : SITE.name)
         : `${document.title} — ${SITE.name}`;
     }
-    if (SITE.description) {
-      const meta = document.querySelector('meta[name="description"]') || document.head.appendChild(
-        Object.assign(document.createElement("meta"), { name: "description" }));
-      meta.content = SITE.description;
+    if (SITE.description && !document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(Object.assign(document.createElement("meta"),
+        { name: "description", content: SITE.description }));
     }
   }
 
@@ -114,7 +114,7 @@
     }
     const photo = (src, i) => `
       <a class="strip-photo" href="galleries.html" style="animation-delay:${200 + i * 110}ms">
-        <img src="${esc(small(src))}" alt="">
+        <img src="${esc(small(src))}" alt="Photograph by Terrence Cao">
       </a>`;
     const signature = HOME.signature
       ? `<img src="${esc(img(HOME.signature))}" alt="${esc(SITE.name)}">`
@@ -211,7 +211,7 @@
     const grid = document.getElementById("portfolio-grid");
     grid.innerHTML = GALLERIES.map((g, i) => `
       <a class="tile" href="gallery.html?g=${encodeURIComponent(g.slug)}" style="animation-delay:${i * 120}ms">
-        <img src="${esc(small(g.cover || g.photos[0]))}" alt="${esc(g.title)}" loading="${i < 4 ? "eager" : "lazy"}">
+        <img src="${esc(small(g.cover || g.photos[0]))}" alt="${esc(`${g.title} photography by Terrence Cao`)}" loading="${i < 4 ? "eager" : "lazy"}">
         <div class="tile-overlay">
           <h2 class="tile-title">${esc(g.title)}</h2>
           <span class="tile-count">${g.photos.length} photograph${g.photos.length === 1 ? "" : "s"}</span>
@@ -241,6 +241,12 @@
       return;
     }
     document.title = `${g.title} — ${SITE.name}`;
+    const about = `${g.title} photography by Terrence Cao${g.description ? ". " + g.description : "."}`;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.content = about;
+    const canonical = Object.assign(document.createElement("link"),
+      { rel: "canonical", href: `https://terrencecaophoto.com/gallery.html?g=${encodeURIComponent(g.slug)}` });
+    document.head.appendChild(canonical);
     head.innerHTML = `
       <a class="back-link" href="galleries.html">&larr; All galleries</a>
       <h1>${esc(g.title)}</h1>
@@ -248,7 +254,7 @@
 
     wall.innerHTML = g.photos.map((p, i) => `
       <button type="button" data-i="${i}" aria-label="Open photo ${i + 1}">
-        <img src="${esc(small(p))}" alt="${esc(g.title + " " + (i + 1))}" loading="lazy"${SIZES[img(p)] ? ` width="${SIZES[img(p)][0]}" height="${SIZES[img(p)][1]}"` : ""}>
+        <img src="${esc(small(p))}" alt="${esc(`${g.title} photograph ${i + 1} by Terrence Cao`)}" loading="lazy"${SIZES[img(p)] ? ` width="${SIZES[img(p)][0]}" height="${SIZES[img(p)][1]}"` : ""}>
       </button>`).join("");
     wall.querySelectorAll("img").forEach((el) => {
       if (el.complete) el.classList.add("loaded");
@@ -369,7 +375,7 @@
     el.innerHTML = `
       ${awards}
       <div class="about-side">
-        ${ABOUT.portrait ? `<img class="about-photo" src="${esc(img(ABOUT.portrait))}" alt="Portrait">` : ""}
+        ${ABOUT.portrait ? `<img class="about-photo" src="${esc(img(ABOUT.portrait))}" alt="Terrence Cao, photographer">` : ""}
         ${ABOUT.headline ? `<h1>${esc(ABOUT.headline)}</h1>` : ""}
         ${paragraphs(ABOUT.bio)}
         ${ABOUT.buttonText ? `<a class="button" href="contact.html">${esc(ABOUT.buttonText)}</a>` : ""}

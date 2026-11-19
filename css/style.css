@@ -535,3 +535,9 @@ a.award-logo:hover { opacity: .8; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .tile { opacity: 1; transform: none; }
 }
+
+/* Text for search engines and screen readers that isn't shown on screen. */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
