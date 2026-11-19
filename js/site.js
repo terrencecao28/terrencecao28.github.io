@@ -282,10 +282,43 @@
     const counter = lb.querySelector(".lb-counter");
     let current = 0;
 
+    // Full-size photos are big, so each one first appears as the smaller grid
+    // copy (usually already downloaded) and sharpens once the full one arrives.
+    // The photos either side are fetched ahead of time so the arrows feel instant.
+    const fetched = {};
+    const fetchPhoto = (src) => {
+      if (!fetched[src]) {
+        const im = new Image();
+        fetched[src] = new Promise((done) => { im.onload = () => done(true); im.onerror = () => done(false); });
+        im.src = src;
+        fetched[src].im = im; // keep it alive so the browser keeps it cached
+      }
+      return fetched[src];
+    };
+    // Size the photo to its final on-screen size up front, so the quick copy
+    // and the sharp one take up exactly the same space.
+    const fitView = (dims) => {
+      view.style.width = view.style.height = "";
+      if (!dims) return;
+      const cs = getComputedStyle(view);
+      const s = Math.min(parseFloat(cs.maxWidth) / dims[0], parseFloat(cs.maxHeight) / dims[1], 1);
+      if (s > 0) { view.style.width = dims[0] * s + "px"; view.style.height = dims[1] * s + "px"; }
+    };
+    window.addEventListener("resize", () => fitView(SIZES[photos[current]]));
     const show = (i) => {
       current = (i + photos.length) % photos.length;
-      view.src = photos[current];
+      const full = photos[current], quick = small(full), dims = SIZES[full];
+      fitView(dims);
+      view.src = quick;
+      if (quick !== full) {
+        const want = current;
+        fetchPhoto(full).then((ok) => { if (ok && current === want) view.src = full; });
+      }
       counter.textContent = `${current + 1} / ${photos.length}`;
+      [1, -1, 2].forEach((d) => {
+        const p = photos[(current + d + photos.length) % photos.length];
+        fetchPhoto(small(p)).then(() => fetchPhoto(p));
+      });
     };
     const open = (i) => { show(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; };
     const close = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
